@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://letmeaskaiforyou.com/" />
+    <link rel="stylesheet" href="./index.css">
+    <link rel="icon" href="./favicon.ico" />
+    <title>Let Me Ask AI For You...</title>
+    <meta name="description"
+        content="Your friends might know how to Google stuff, but do they know how to work with latest AI technologies?">
+</head>
+
+<body>
+    <header class="logo">
+        <h1>让我帮你问AI</h1>
+        <div class="description-section">
+            <h2 class="description">
+                你的朋友可能很擅长问问题，但他们是否知道AI就能解决他们的问题？输入你的问题并分享链接，向朋友展示AI所能实现的惊人成果。
+            </h2>
+        </div>
+    </header>
+    <main>
+
+        <section>
+            <form id="search-form">
+                <div class="bar">
+                    <input placeholder='问我任何问题，例如：“如何用鲁迅的口吻创作一首现代诗”'
+                        id="search-form-input" class="searchbar" type="text" title="Search">
+                </div>
+                <div class="buttons">
+                    <input class="button" type="submit" value="问AI机器人" searchType="chat"></input>
+                    <input class="button" type="submit" value="AI搜索" searchType="search"></input>
+                </div>
+            </form>
+        </section>
+
+        <section id="copy-url-container" class="copy-url-container">
+            <input id="copy-url-text" class="url" value="https://codepen.io/ayoisaiah/pen/YbNazJsmnbklasnkldanslkdn">
+            </input>
+            <button id="copy-url-btn" class="button copy-url-btn">复制链接</button>
+        </section>
+    </main>
+
+
+</body>
+<script src="./index.js"></script>
+
+</html>
