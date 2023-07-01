@@ -10,7 +10,7 @@ const SEARCH_TYPE_CHATBOT = "chat";
 const COPY_LINK_CONTAINER_ID = "copy-url-container";
 const COPY_URL_BTN = "copy-url-btn";
 const COPY_LINK_TEXT_ID = "copy-url-text";
-const SEARCH_ENGINE_YOU_ID = "https://www.zelinai.com";
+const SEARCH_ENGINE_YOU_ID = "https://chat.ai.sb/";
 
 /**
  * DOM ELEMENTS
@@ -59,7 +59,7 @@ function navigateToExternalLink() {
 function createExternalLink(searchEngineUrl = SEARCH_ENGINE_YOU_ID) {
   switch (searchEngineUrl) {
     case SEARCH_ENGINE_YOU_ID: {
-      const url = new URL(`https://www.zelinai.com/dialogue`);
+      const url = new URL(`https://chat.ai.sb/`);
       url.searchParams.append("q", decodeURIComponent(queryParam));
       // if (searchType === SEARCH_TYPE_CHATBOT) {
       //   url.searchParams.append("tbm", "youchat");
