@@ -92,51 +92,31 @@ function createInternalUrlCopyElement(internalUrl) {
 
   const copyUrlBtn = document.getElementById(COPY_URL_BTN);
   if (copyUrlBtn) {
-    const fallback = () => {
-      alert(`请点击“确定”然后在“复制链接”左边的框中手动复制目标网址`);
-    };
-    copyUrlBtn.onclick = () => {
-      try {
-        navigator.clipboard
-          .writeText(internalUrl)
-          .then(() => {
-            alert(`成功复制网址. 把他分享给你的朋友吧`);
-          })
-          .catch(() => {
-            fallback();
-          });
-      } catch (error) {
-        try{
-          const text = document.createElement('textarea');
-          text.value = internalUrl;
-          text.style.fontSize = '12pt';
-          text.style.border = '0';
-          text.style.padding = '0';
-          text.style.margin = '0';
-          text.style.position = 'absolute';
-          text.style.left = '-9999px';
-          const selection = window.getSelection();
-          const originalRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
-          text.setAttribute('readonly', '');
-          document.body.appendChild(text);
-          text.focus();
-          text.setSelectionRange(0, text.value.length);
-          const range = document.createRange();
-          range.selectNodeContents(text);
-          selection.removeAllRanges();
-          selection.addRange(range);
-          text.setSelectionRange(0, 999999);
-          document.execCommand('copy');
-          selection.removeAllRanges();
-          if (originalRange) {
-              selection.addRange(originalRange);
+    // const fallback = () => {
+    //   alert(`移动端请点击“确定”然后在“复制链接”左边的框中手动复制目标网址`);
+    // };
+    // copyUrlBtn.onclick = () => {
+    //   try {
+    //     navigator.clipboard
+    //       .writeText(internalUrl)
+    //       .then(() => {
+    //         alert(`成功复制网址. 把他分享给你的朋友吧`);
+    //       })
+    //       .catch(() => {
+    //         fallback();
+    //       });
+    //   } catch (error) {
+    //     fallback();
+    //   }
+    // };
+    $(".copy-url-container").click(function(){
+      $.copy({
+          content:`${internalUrl}`, //自定义复制内容，默认'请配置复制内容'
+          callback:function(){ //自定义复制成功回调函数，常用于复制成功提示，不配置callback，则不显示
+              alert('复制成功');
           }
-          document.body.removeChild(text);
-        } catch(error){
-            fallback();
-        }
-      }
-    };
+      });
+  })
   }
 }
 function createIframe(internalUrl) {
