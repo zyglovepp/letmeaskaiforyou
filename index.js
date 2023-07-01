@@ -93,14 +93,14 @@ function createInternalUrlCopyElement(internalUrl) {
   const copyUrlBtn = document.getElementById(COPY_URL_BTN);
   if (copyUrlBtn) {
     const fallback = () => {
-      alert(`Copy to clipbaord failed. Copy the url manually ${internalUrl}`);
+      alert(`复制失败. 请点击“确定”然后在“复制链接”左边的框中手动复制目标网址`);
     };
     copyUrlBtn.onclick = () => {
       try {
         navigator.clipboard
           .writeText(internalUrl)
           .then(() => {
-            alert(`Successfully copied URL. Share it with your friends!`);
+            alert(`成功复制网址. 把他分享给你的朋友吧`);
           })
           .catch(() => {
             fallback();
