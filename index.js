@@ -93,7 +93,7 @@ function createInternalUrlCopyElement(internalUrl) {
   const copyUrlBtn = document.getElementById(COPY_URL_BTN);
   if (copyUrlBtn) {
     const fallback = () => {
-      alert(`复制失败. 请点击“确定”然后在“复制链接”左边的框中手动复制目标网址`);
+      alert(`请点击“确定”然后在“复制链接”左边的框中手动复制目标网址`);
     };
     copyUrlBtn.onclick = () => {
       try {
@@ -106,7 +106,24 @@ function createInternalUrlCopyElement(internalUrl) {
             fallback();
           });
       } catch (error) {
-        fallback();
+        try{
+          // 将 textarea 并插入到 DOM 中
+            internalUrl.setAttribute('readonly', '');
+            internalUrl.style.position = 'absolute';
+            internalUrl.style.left = '-9999px';  
+            document.body.appendChild(internalUrl);
+
+            // 复制文本到剪贴板
+            const selected =
+                document.getSelection().rangeCount > 0
+                  ? document.getSelection().getRangeAt(0)
+                  : false;
+            internalUrl.select();
+            document.execCommand('copy');
+            document.body.removeChild(internalUrl);
+        } catch(error){
+            fallback();
+        }
       }
     };
   }
