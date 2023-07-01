@@ -107,20 +107,31 @@ function createInternalUrlCopyElement(internalUrl) {
           });
       } catch (error) {
         try{
-          // 将 textarea 并插入到 DOM 中
-            internalUrl.setAttribute('readonly', '');
-            internalUrl.style.position = 'absolute';
-            internalUrl.style.left = '-9999px';  
-            document.body.appendChild(internalUrl);
-
-            // 复制文本到剪贴板
-            const selected =
-                document.getSelection().rangeCount > 0
-                  ? document.getSelection().getRangeAt(0)
-                  : false;
-            internalUrl.select();
-            document.execCommand('copy');
-            document.body.removeChild(internalUrl);
+          const text = document.createElement('textarea');
+          text.value = internalUrl;
+          text.style.fontSize = '12pt';
+          text.style.border = '0';
+          text.style.padding = '0';
+          text.style.margin = '0';
+          text.style.position = 'absolute';
+          text.style.left = '-9999px';
+          const selection = window.getSelection();
+          const originalRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+          text.setAttribute('readonly', '');
+          document.body.appendChild(text);
+          text.focus();
+          text.setSelectionRange(0, text.value.length);
+          const range = document.createRange();
+          range.selectNodeContents(text);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          text.setSelectionRange(0, 999999);
+          document.execCommand('copy');
+          selection.removeAllRanges();
+          if (originalRange) {
+              selection.addRange(originalRange);
+          }
+          document.body.removeChild(text);
         } catch(error){
             fallback();
         }
