@@ -53,14 +53,14 @@ function startFakeTyping() {
 
 function navigateToExternalLink() {
   const link = createExternalLink();
-  location.href = link.replace("%2520", "+");
+  location.href = link.replace(" ", "+");
 }
 
 function createExternalLink(searchEngineUrl = SEARCH_ENGINE_YOU_ID) {
   switch (searchEngineUrl) {
     case SEARCH_ENGINE_YOU_ID: {
       const url = new URL(`https://chat.ai.sb/`);
-      url.searchParams.append("q", decodeURIComponent(queryParam));
+      url.searchParams.append("prompt", decodeURIComponent(queryParam));
       // if (searchType === SEARCH_TYPE_CHATBOT) {
       //   url.searchParams.append("tbm", "youchat");
       // }
